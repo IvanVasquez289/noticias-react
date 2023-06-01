@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 
 const NoticiasContext = createContext()
@@ -5,6 +6,19 @@ const NoticiasContext = createContext()
 const NoticiasProvider =({children}) => {
 
     const [categoria,setCategoria] = useState('general')
+    const [noticias,setNoticias] = useState([])
+
+    useEffect(() => {
+        const apiKey = import.meta.env.VITE_API_KEY
+        const consultarApi = async () => {
+            const url = `https://newsapi.org/v2/top-headlines?country=mx&category=${categoria}&apiKey=${apiKey}`
+            
+            const {data} = await axios(url)
+            setNoticias(data.articles)
+        }
+        consultarApi()
+    }, [categoria])
+    
 
     const handleChangeCategoria = e => {
         setCategoria(e.target.value)
@@ -13,7 +27,8 @@ const NoticiasProvider =({children}) => {
         <NoticiasContext.Provider
             value={{
                 categoria,
-                handleChangeCategoria
+                handleChangeCategoria,
+                noticias
             }}
         >
             {children}
