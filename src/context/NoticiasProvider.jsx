@@ -11,7 +11,7 @@ const NoticiasProvider =({children}) => {
     useEffect(() => {
         const apiKey = import.meta.env.VITE_API_KEY
         const consultarApi = async () => {
-            const url = `https://newsapi.org/v2/top-headlines?country=mx&category=${categoria}&apiKey=${apiKey}`
+            const url = `https://newsapi.org/v2/top-headlines?country=us&category=${categoria}&apiKey=${apiKey}`
             
             const {data} = await axios(url)
             setNoticias(data.articles)

@@ -11,10 +11,11 @@ const ListadoNoticias = () => {
             Últimas Noticias
         </Typography>
 
-
-        {noticias.map( noticia => (
-            <Noticia noticia={noticia} key={noticia.url}/>
-        ))}
+        <Grid container spacing={2}>
+          {noticias.map( noticia => (
+              <Noticia noticia={noticia} key={noticia.url}/>
+          ))}
+        </Grid>
     </>
   )
 }
